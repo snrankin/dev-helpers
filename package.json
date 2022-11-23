@@ -1,0 +1,32 @@
+{
+  "name": "@monorepo-starter/root",
+  "version": "1.0.0",
+  "description": "An example setup of how to do a monorepo, used in our monorepo 'getting started' guide",
+  "repository": "git@github.com:Thinkmill/monorepo-example.git",
+  "author": "Ben Conolly <ben@thinkmill.com.au>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "websites/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "postinstall": "preconstruct dev && manypkg check",
+    "build": "preconstruct build",
+    "release": "yarn build && changeset publish",
+    "test": "jest",
+    "clean": "manypkg exec rm -rf node_modules && manypkg exec rm -rf dist && rm -rf node_modules"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.5.0",
+    "@manypkg/cli": "^0.9.0",
+    "@preconstruct/cli": "^1.1.4"
+  },
+  "preconstruct": {
+    "packages": [
+      "packages/*",
+      "apps/*"
+    ]
+  }
+}
